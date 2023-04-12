@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row mb-4">
+        <div class="col-6">
+            <p class="mb-0">
+                <a class="btn btn-success" href="{% url 'payapp:request-create' %}">
+                    <b>Request Transaction</b>
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class="card card-rounded">
+        {% if object_list %}
+            <div class="card-body card-rounded p-0">
+                <div class="table-responsive">
+                    <table class="table align-middle table-nowrap table-check">
+                        <thead class="table-light">
+                        <tr>
+                            <th class="align-middle">ID</th>
+                            <th class="align-middle">Sender</th>
+                            <th class="align-middle">Receiver</th>
+                            <th class="align-middle">Amount</th>
+                            <th class="align-middle">Type</th>
+                            <th class="align-middle">Status</th>
+                            <th class="align-middle">Created</th>
+                            <th class="align-middle">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for objects in object_list %}
+                            <tr>
+                                <td>
+                                    <b># {{ objects.id }}</b>
+                                </td>
+                                <td>
+                                    {% if objects.sender == request.user %}
+                                        <b>-</b>
+                                    {% else %}
+                                        {{ objects.sender.get_name_info }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if objects.receiver == request.user %}
+                                        <b>-</b>
+                                    {% else %}
+                                        {{ objects.receiver.get_name_info }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <b>{{ objects.amount }} {{ request.user.currency_type }}</b>
+                                </td>
+                                <td>
+                                    <b>
+                                        {% if objects.sender == request.user %}
+                                            <i class="mdi mdi-arrow-up text-primary"></i> Send
+                                        {% else %}
+                                            <i class="mdi mdi-arrow-down text-primary"></i> Received
+                                        {% endif %}
+                                    </b>
+                                </td>
+                                <td>
+                                    <b>
+                                        {% if objects.status == 'pending' %}
+                                            <i class="mdi mdi-clock text-warning"></i> {{ objects.get_status_display }}
+                                        {% elif objects.status == 'accepted' %}
+                                            <i class="mdi mdi-check-circle text-success"></i>
+                                            {{ objects.get_status_display }}
+                                        {% else %}
+                                            <i class="mdi mdi-cancel text-danger"></i>
+                                            {{ objects.get_status_display }}
+                                        {% endif %}
+                                    </b>
+                                </td>
+                                <td>
+                                    <i class="fab me-1"></i> {{ objects.created_on }}
+                                </td>
+                                <td>
+                                    {% if objects.receiver == request.user %}
+                                        {% if objects.status == "pending" %}
+                                            <a href="{% url 'payapp:request-update' objects.id %}?status=approved"><span
+                                                    class="badge badge-pill badge-soft-success font-size-12">Accept</span></a>
+                                            <a href="{% url 'payapp:request-update' objects.id %}?status=cancel"><span
+                                                    class="badge badge-pill badge-soft-danger font-size-12">Cancel</span></a>
+                                        {% elif objects.status == "approved" %}
+                                            <a href="#"><span
+                                                    class="badge badge-pill badge-soft-success font-size-12">{{ objects.status }}</span></a>
+                                        {% else %}
+                                            <a href="#"><span
+                                                    class="badge badge-pill badge-soft-secondary font-size-12">{{ objects.status }}</span></a>
+                                        {% endif %}
+                                    {% elif objects.sender == request.user %}
+                                        {% if objects.status == "pending" %}
+                                            <span
+                                                    class="badge badge-pill badge-soft-primary font-size-12">{{ objects.status }}</span>
+                                        {% elif objects.status == "approved" %}
+                                            <span
+                                                    class="badge badge-pill badge-soft-success font-size-12">{{ objects.status }}</span>
+                                        {% else %}
+                                            <span
+                                                    class="badge badge-pill badge-soft-secondary font-size-12">{{ objects.status }}</span>
+                                        {% endif %}
+                                    {% endif %}
+
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% else %}
+            <div class="card-body">
+                <p class="mb-0 text-danger">
+                    <b>No requests available</b>
+                </p>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,101 @@
+{% extends 'payapp/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Preloader -->
+<div id="preloader">
+  <div data-loader="dual-ring"></div>
+</div>
+<!-- Preloader End -->
+
+<!-- Document Wrapper
+============================================= -->
+<div id="main-wrapper">
+
+  <!-- Header
+  ============================================= -->
+  <header id="header">
+    <div class="container">
+      <div class="header-row">
+        <div class="header-column justify-content-start">
+          <!-- Logo
+          ============================= -->
+          <div class="logo me-3"> <a class="d-flex" href="index.html" title="Payyed - HTML Template">
+              <img src="{% static 'logo.png' %}" width="100" height="auto"  alt="Payment Service" /></a>
+          </div>
+          <!-- Logo end -->
+          <!-- Collapse Button
+          ============================== -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header-nav"> <span></span> <span></span> <span></span> </button>
+          <!-- Collapse Button end -->
+
+          <!-- Primary Navigation
+          ============================== -->
+          <!-- Primary Navigation end -->
+        </div>
+        <div class="header-column justify-content-end">
+          <!-- Login & Signup Link
+          ============================== -->
+          <nav class="login-signup navbar navbar-expand">
+            <ul class="navbar-nav">
+              <li><a href="{% url 'register:login' %}">Login</a> </li>
+              <li class="align-items-center h-auto ms-sm-3"><a class="btn btn-primary" href="{% url 'register:signup' %}">Sign Up</a></li>
+            </ul>
+          </nav>
+          <!-- Login & Signup Link end -->
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Header End -->
+
+  <!-- Content
+  ============================================= -->
+  <div id="content">
+
+    <!-- Slideshow
+    ============================================= -->
+	<div class="owl-carousel owl-theme single-slideshow" data-autoplay="true" data-loop="true" data-autoheight="true" data-nav="true" data-items="1">
+      <div class="item">
+        <section class="hero-wrap">
+          <div class="hero-mask opacity-7 bg-dark"></div>
+          <div class="hero-bg" style="background-image:url('{% static 'website/images/image-1.jpg' %}');"></div>
+          <div class="hero-content d-flex fullscreen-with-header py-5">
+            <div class="container my-auto text-center">
+              <h2 class="text-16 text-white">Send & Receive Money</h2>
+              <p class="text-5 text-white mb-4">Quickly and easily send, receive and request money online with Payyed.<br class="d-none d-lg-block">
+                Over 180 countries and 4 currencies supported.</p>
+              <a href="{% url 'register:signup' %}" class="btn btn-primary m-2">Open a Free Account</a> </div>
+          </div>
+        </section>
+      </div>
+      <div class="item">
+        <section class="hero-wrap">
+          <div class="hero-bg" style="background-image:url('{% static 'website/images/image-3.jpg' %}');"></div>
+          <div class="hero-content d-flex fullscreen-with-header py-5">
+            <div class="container my-auto">
+              <div class="row">
+                <div class="col-12 col-lg-8 col-xl-7 text-center text-lg-start">
+                  <h2 class="text-13 text-white">Trusted by more than 50,000 businesses worldwide.</h2>
+                  <p class="text-5 text-white mb-4">Over 180 countries and 4 currencies supported.</p>
+                  <a href="{% url 'register:signup' %}" class="btn btn-primary me-3">Get started for free</a> </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <!-- Slideshow end -->
+
+
+    <!-- Mobile App end -->
+
+  </div>
+  <!-- Content end -->
+
+
+</div>
+<!-- Document Wrapper end -->
+
+{% endblock content%}
+
+

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row mb-4">
+        <div class="col-6">
+            <p class="mb-0">
+                <a class="btn btn-success" href="{% url 'payapp:transaction-create' %}">
+                    <b>Send Transaction</b>
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class="card card-rounded">
+        {% if objects %}
+            <div class="card-body card-rounded p-0">
+                <div class="table-responsive">
+                    <table class="table align-middle table-nowrap table-check">
+                        <thead class="table-light">
+                        <tr>
+                            <th class="align-middle">ID</th>
+                            <th class="align-middle">Sender</th>
+                            <th class="align-middle">Receiver</th>
+                            <th class="align-middle">Amount</th>
+                            <th class="align-middle">Type</th>
+                            <th class="align-middle">Status</th>
+                            <th class="align-middle">Created</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for objects in objects %}
+                            <tr>
+                                <td>
+                                    <b># {{ objects.id }}</b>
+                                </td>
+                                <td>
+                                    {% if objects.sender == request.user %}
+                                        <b>-</b>
+                                    {% else %}
+                                        {{ objects.sender.get_name_info }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if objects.receiver == request.user %}
+                                        <b>-</b>
+                                    {% else %}
+                                        {{ objects.receiver.get_name_info }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <b>{{ objects.amount }} {{ request.user.currency_type }}</b>
+                                </td>
+                                <td>
+                                    <b>
+                                        {% if objects.sender == request.user %}
+                                            <i class="mdi mdi-minus text-danger"></i> Send
+                                        {% else %}
+                                            <i class="mdi mdi-plus text-success"></i> Received
+                                        {% endif %}
+                                    </b>
+                                </td>
+                                <td>
+                                    <b>
+                                        {% if objects.is_completed %}
+                                            <i class="mdi mdi-check text-success"></i> completed
+                                        {% else %}
+                                            <i class="mdi mdi-cancel text-danger"></i> cancelled
+                                        {% endif %}
+                                    </b>
+                                </td>
+                                <td>
+                                    <i class="fab me-1"></i> {{ objects.created_on }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% else %}
+            <div class="card-body">
+                <p class="mb-0 text-danger">
+                    <b>No transactions available</b>
+                </p>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock content %}

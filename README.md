@@ -1,2 +1,3 @@
-# excap-online-payments-project
-............................................
+# Installation Guide
+
+        pip install -r requirements.txt

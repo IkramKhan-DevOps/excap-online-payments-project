@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block subtitle %}Sign Up{% endblock %}
+
+
+{% block only-body %}
+
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth px-0">
+                <div class="row w-100 mx-0">
+                    <div class="col-lg-5 mx-auto">
+                        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                            <div class="brand-logo">
+                                <img src="{% static 'logo.png' %}" alt="logo">
+                            </div>
+                            <h4>Hello! Get registered yourself.</h4>
+                            <h6 class="fw-light">Sign up to continue.</h6>
+                            <form class="pt-3" id="signup_form" method="post" action="">
+                                {% csrf_token %}
+
+
+                                {{ form | crispy }}
+                                {% if redirect_field_value %}
+                                    <input type="hidden" name="{{ redirect_field_name }}"
+                                           value="{{ redirect_field_value }}"/>
+                                {% endif %}
+
+                                <div class="mt-4">
+                                    <button class="btn btn-success btn-block waves-effect waves-light"
+                                            type="submit">Register
+                                    </button>
+                                </div>
+
+                                <div class="text-center mt-4 fw-light">
+                                    Already have an account? Then please <a href="{% url 'register:login' %}" class="text-primary">Signin</a>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

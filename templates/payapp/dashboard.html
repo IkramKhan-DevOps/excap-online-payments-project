@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="home-tab">
+                <div class="tab-content tab-content-basic">
+                    <div class="tab-pane fade show active" id="overview" role="tabpanel"
+                         aria-labelledby="overview">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="statistics-title">Total Balance</p>
+                                        <h3 class="rate-percentage">{{ amount }}</h3>
+                                    </div>
+                                    <div class="col">
+                                        <p class="statistics-title">Currency</p>
+                                        <h3 class="rate-percentage">{{ currency }}</h3>
+                                    </div>
+                                    <div class="col">
+                                        <p class="statistics-title">Transactions Sent</p>
+                                        <h3 class="rate-percentage">{{ r_sent }}</h3>
+                                    </div>
+                                    <div class="col">
+                                        <p class="statistics-title">Transactions Received</p>
+                                        <h3 class="rate-percentage">{{ t_received }}</h3>
+                                    </div>
+                                    <div class="col">
+                                        <p class="statistics-title">Requests Sent</p>
+                                        <h3 class="rate-percentage">{{ r_sent }}</h3>
+                                    </div>
+                                    <div class="col">
+                                        <p class="statistics-title">Requests Received</p>
+                                        <h3 class="rate-percentage">{{ r_received }}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

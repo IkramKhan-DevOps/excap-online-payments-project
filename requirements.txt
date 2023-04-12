@@ -1,0 +1,11 @@
+pillow
+markdown
+
+django
+django-crispy-forms
+crispy-bootstrap5
+django-browser-reload
+
+djangorestframework
+markdown
+django-filter
